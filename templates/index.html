@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Model Deployment Website</title>
+    <style>
+        body::-webkit-scrollbar {
+            width: 1em;
+        }
+
+        body::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .circle{
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .one{
+            background: linear-gradient(135deg, transparent 20%, #000);
+            top: 40px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .two{
+            background: linear-gradient(45deg, transparent 20%, #000);
+            top: 300px;
+            left: 100px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .three{
+            background: linear-gradient(150deg, transparent 20%, #000);
+            top: 90vh;
+            left: 100px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .four{
+            background: linear-gradient(10deg, transparent 20%, #000);
+            top: 10px;
+            left: 60vw;
+            width: 50px;
+            height: 50px;
+        }
+
+        .five{
+            background: linear-gradient(135deg, transparent 20%, #000);
+            top: 10px;
+            left: 80vw;
+            width: 150px;
+            height: 150px;
+        }
+
+        .six{
+            background: linear-gradient(150deg, transparent 20%, #000);
+            top: 70vh;
+            left: 72vw;
+            width: 200px;
+            height: 200px;
+        }
+
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            /* left: 40%; */
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .input-container {
+            position: relative;
+            margin: 0.8rem 0;
+            width: 300px;
+            margin-left: -4%;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            outline: none;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            background: transparent;
+            padding: 0.6rem 1.2rem;
+            color: rgba(0, 0, 0, 0.8);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .input-container label {
+            position: absolute;
+            top: 40%;
+            left: 7px;
+            transform: translateY(-50%);
+            padding: 0 0.4rem;
+            color: #000;
+            font-size: 0.9rem;
+            font-weight: 400;
+            pointer-events: none;
+            z-index: 1000;
+            transition: 0.5s;
+            font-weight: bold;
+        }
+
+        .input-container span {
+            position: absolute;
+            top: 0;
+            left: 25px;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            padding: 0 0.4rem;
+            color: transparent;
+            pointer-events: none;
+            z-index: 500;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border: 2px solid #000;
+        }
+
+        .input-container span:before,
+        .input-container span:after {
+            content: "";
+            position: absolute;
+            width: 10%;
+            opacity: 0;
+            transition: 0.3s;
+            height: 5px;
+            background-color: #fff;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .input-container span:before {
+            left: 50%;
+        }
+
+        .input-container span:after {
+            right: 50%;
+        }
+
+        .input-container.focus label {
+            top: 0;
+            transform: translateY(-50%);
+            left: 22px;
+            color: #000;
+            font-size: 0.8rem;
+        }
+
+        .input-container.focus span:before,
+        .input-container.focus span:after {
+            width: 55%;
+            opacity: 1;
+        }
+
+        .result-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result-container p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .button-container:hover {
+            background-color: #555;
+        }
+
+        .check,
+        .selection {
+            position: relative;
+            margin: 0.8rem 0;
+            width: 300px;
+            margin-left: -4%;
+            margin-top: 20px;
+        }
+
+        .check input {
+            cursor: pointer;
+            accent-color: #000;
+        }
+
+        .check label,
+        .selection label {
+            font-weight: bold;
+        }
+
+        .selection select {
+            cursor: pointer;
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            width: 120px;
+            border-radius: 1px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <span class="circle one"></span>
+    <span class="circle two"></span>
+    <span class="circle three"></span>
+    <span class="circle four"></span>
+    <span class="circle five"></span>
+    <span class="circle six"></span>
+    <form class="container" action="{{ url_for('predict')}}" method="POST">
+        <h1 style="width: 800px; margin-bottom: 70px;">Booking Status Classification</h1>
+        <div class="input-container">
+            <input type="text" name="Booking_ID" class="input">
+            <label for="">Booking ID</label>
+            <span>Booking ID</span>
+        </div>
+        <div class="input-container">
+            <input type="number" name="number_of_adults" class="input" required>
+            <label for="">number of adults</label>
+            <span>number of adults</span>
+        </div>
+        <div class="input-container">
+            <input type="number" name="number_of_children" class="input" required>
+            <label for="">number of children</label>
+            <span>number of children</span>
+        </div>
+        <div class="input-container">
+            <input type="number" name="number_of_weekend_nights" class="input" required>
+            <label for="">number of weekend nights</label>
+            <span>number of weekend nights</span>
+        </div>
+        <div class="input-container">
+            <input type="number" name="number_of_week_nights" class="input" required>
+            <label for="">number of week nights</label>
+            <span>number of week nights</span>
+        </div>
+        <div class="input-container">
+            <input type="number" name="previosly_canceled" class="input" required>
+            <label for="">previously canceled</label>
+            <span>previously canceled</span>
+        </div>
+        <div class="input-container">
+            <input type="number" name="previosly_not_canceled" class="input" required>
+            <label for="">previously not canceled</label>
+            <span>previously not canceled</span>
+        </div>
+        <div class="input-container">
+            <input type="number" name="lead_time" class="input" required>
+            <label for="">lead time</label>
+            <span>lead time</span>
+        </div>
+        <div class="input-container">
+            <input type="text" name="average_price" class="input" required>
+            <label for="">average price</label>
+            <span>average price</span>
+        </div>
+        <div class="input-container">
+            <input type="text" name="special_requests" class="input" required>
+            <label for="">special requests</label>
+            <span>special requests</span>
+        </div>
+        <div style="position: relative;
+        margin: 0.8rem 0;
+        width: 300px;
+        margin-left: -4%;
+        margin-top: 20px;">
+            <label for="" style="margin-right: 30px; font-weight: bold;">Date:</label>
+            <input type="date" name="date" class="input" style="cursor: pointer; width: 200px;" required>
+        </div>
+        <div class="check">
+            <input type="checkbox" name="car_parking_space" class="input">
+            <label for="">car parking space</label>
+        </div>
+        <div class="check">
+            <input type="checkbox" name="repeated" class="input">
+            <label for="">repeated</label>
+        </div>
+        <div class="selection">
+            <label for="">type of meal:</label>
+            <select name="type_of_meal">
+                <option> Not Selected </option>
+                <option> 1 </option>
+                <option> 2 </option>
+                <option> 3 </option>
+            </select>
+        </div>
+        <div class="selection">
+            <label for="">room type:</label>
+            <select name="room_type">
+                <option> 1 </option>
+                <option> 2 </option>
+                <option> 3 </option>
+                <option> 4 </option>
+                <option> 5 </option>
+                <option> 6 </option>
+                <option> 7 </option>
+            </select>
+        </div>
+        <div class="selection">
+            <label for="">market segment type:</label>
+            <select name="market_segment_type">
+                <option> Offline </option>
+                <option> Online </option>
+                <option> Corporate </option>
+                <option> Aviation </option>
+                <option> Complementary </option>
+            </select>
+        </div>
+        <!-- <div class="button-container" style="margin-left: 400px; margin-right: 400px;">
+            <button onclick="predict()">Predict</button>
+        </div> -->
+
+        <!-- <input type="submit" class="button-container" style="margin-left: 400px; margin-right: 400px;" onclick="predict()" value="predict"> -->
+        <button type="submit" class="button-container" style="margin-left: 400px; margin-right: 400px;"
+            >predict</button>
+        <div class="result-container">
+            <div class="loader" id="loader" style="font-weight: bold;"></div>
+            <p id="result">{{predection_text}}</p>
+        </div>
+    </form>
+    <script>
+        
+        input = document.querySelectorAll(".input");
+
+        function focusFunc() {
+            let parent = this.parentNode;
+            parent.classList.add("focus");
+        }
+
+        function blurFunc() {
+            let parent = this.parentNode;
+            if (this.value == "") {
+                parent.classList.remove("focus");
+            }
+        }
+
+        input.forEach(input => {
+            input.addEventListener("focus", focusFunc);
+            input.addEventListener("blur", blurFunc);
+        });
+    </script>
+</body>
+
+</html>
